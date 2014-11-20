@@ -1,4 +1,4 @@
-home
+www.maxwe.org
 ====
 
-this is a website about maxwe.org
+the website about maxwe.org
