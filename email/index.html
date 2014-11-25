@@ -98,11 +98,12 @@
     </script>
     -->
 </head>
-<body>
+
+<body onLoad="document.forms.email_login.uin.focus()">
     <div id="divLoginpanelVer" class="bizmail_loginpanel">
     	<div class="bizmail_LoginBox">
     		<h3>登录邮箱</h3>
-    		<form name="form1" action="https://exmail.qq.com/cgi-bin/login" target="_self" method="post" onsubmit="return checkInput()">
+    		<form name="email_login" action="https://exmail.qq.com/cgi-bin/login" target="_self" method="post" onsubmit="return checkInput()">
     			<input type="hidden" name="firstlogin" value="false">
     			<input type="hidden" name="errtemplate" value="dm_loginpage">
     			<input type="hidden" name="aliastype" value="other">
