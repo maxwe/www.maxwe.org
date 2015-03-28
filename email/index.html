@@ -1,6 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="shortcut icon" href="images/ico_16x16.ico">
     <link rel="shortcut icon" href="images/ico_32x32.ico">
@@ -13,84 +16,10 @@
     <link rel="icon" type="image/x-icon" href="images/ico_64x64.ico">
     <link rel="icon" type="image/x-icon" href="images/ico_128x128.ico">
     <title>mail.maxwe.org</title>
-    <style>
-        .bizmail_loginpanel {
-            font-size: 12px;
-            width: 300px;
-            height: auto;
-            border: 1px solid #cccccc;
-            background: #ffffff;
-            align-content: center;
-            margin: 0 auto;
-            margin-top:200px;
-        }
-
-        .bizmail_LoginBox {
-            padding: 10px 15px;
-        }
-
-        .bizmail_loginpanel h3 {
-            padding-bottom: 5px;
-            margin: 0 0 5px 0;
-            border-bottom: 1px solid #cccccc;
-            font-size: 14px;
-        }
-
-        .bizmail_loginpanel form {
-            margin: 0;
-            padding: 0;
-        }
-
-        .bizmail_loginpanel input.text {
-            font-size: 12px;
-            width: 100px;
-            height: 20px;
-            margin: 0 2px;
-            border: 1px solid #C3C3C3;
-            border-color: #7C7C7C #C3C3C3 #C3C3C3 #9A9A9A;
-        }
-
-        .bizmail_loginpanel .bizmail_column {
-            height: 28px;
-        }
-
-        .bizmail_loginpanel .bizmail_column label {
-            display: block;
-            float: left;
-            width: 30px;
-            height: 24px;
-            line-height: 24px;
-            font-size: 12px;
-        }
-
-        .bizmail_loginpanel .bizmail_column .bizmail_inputArea {
-            float: left;
-            width: 240px;
-        }
-
-        .bizmail_loginpanel .bizmail_column span {
-            font-size: 12px;
-            word-wrap: break-word;
-            margin-left: 2px;
-            line-height: 200%;
-        }
-
-        .bizmail_loginpanel .bizmail_SubmitArea {
-            margin-left: 30px;
-            clear: both;
-        }
-
-        .bizmail_loginpanel .bizmail_SubmitArea a {
-            font-size: 12px;
-            margin-left: 5px;
-        }
-
-        .bizmail_loginpanel select {
-            width: 110px;
-            height: 20px;
-            margin: 0 2px;
-        }
-    </style>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://exmail.qq.com/zh_CN/htmledition/js_biz/outerlogin.js" charset="gb18030"></script>
     <!--
     <script type="text/javascript">
@@ -99,35 +28,29 @@
     -->
 </head>
 
-<body onLoad="document.forms.email_login.uin.focus()">
-    <div id="divLoginpanelVer" class="bizmail_loginpanel">
-    	<div class="bizmail_LoginBox">
-    		<h3>登录邮箱</h3>
-    		<form name="email_login" action="https://exmail.qq.com/cgi-bin/login" target="_self" method="post" onsubmit="return checkInput()">
-    			<input type="hidden" name="firstlogin" value="false">
-    			<input type="hidden" name="errtemplate" value="dm_loginpage">
-    			<input type="hidden" name="aliastype" value="other">
-    			<input type="hidden" name="dmtype" value="bizmail">
-    			<input type="hidden" name="p" value="">
-    			<div class="bizmail_column">
-    				<label>帐号:</label>
-    				<div class="bizmail_inputArea">
-    					<input type="text" name="uin" class="text" value="">@<span>maxwe.org</span>
-    					<input type="hidden" name="domain" value="maxwe.org">
-    				</div>
-    			</div>
-    			<div class="bizmail_column">
-    				<label>密码:</label>
-    				<div class="bizmail_inputArea">
-    					<input type="password" name="pwd" class="text" value="">
-    				</div>
-    			</div>
-    			<div class="bizmail_SubmitArea">
-    				<input type="submit" class="" name="" style="width:66px;" value="登录">
-    				<!-- <a href="https://exmail.qq.com/cgi-bin/readtemplate?check=false&t=bizmail_orz" target="_blank">忘记密码？</a> -->
-    			</div>
-    		</form>
-    	</div>
-    </div>
+<body>
+<div class="container">
+    <form class="form-signin" name="email_login" action="https://exmail.qq.com/cgi-bin/login" target="_self" method="post" onsubmit="return checkInput()">
+        <input type="hidden" name="firstlogin" value="false">
+        <input type="hidden" name="errtemplate" value="dm_loginpage">
+        <input type="hidden" name="aliastype" value="other">
+        <input type="hidden" name="dmtype" value="bizmail">
+        <input type="hidden" name="p" value="">
+        <h2 class="form-signin-heading">WELCOME TO MAXWE MAIL</h2>
+        <div class="input-group">
+            <input name="uin" type="text" class="form-control" class="form-control" placeholder="Username" required autofocus aria-describedby="basic-addon2">
+            <input type="hidden" name="domain" value="maxwe.org">
+            <span class="input-group-addon" id="basic-addon2">@maxwe.org</span>
+        </div>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input name="pwd" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+</div>
 </body>
 </html>
