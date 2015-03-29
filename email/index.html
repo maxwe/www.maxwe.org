@@ -26,6 +26,48 @@
         writeLoginPanel({domainlist: "maxwe.org", mode: "vertical"});
     </script>
     -->
+    <style>
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #eee;
+        }
+
+        .form-signin {
+            max-width: 330px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+        .form-signin .form-signin-heading,
+        .form-signin .checkbox {
+            margin-bottom: 10px;
+        }
+        .form-signin .checkbox {
+            font-weight: normal;
+        }
+        .form-signin .form-control {
+            position: relative;
+            height: auto;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
+        .form-signin input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -36,7 +78,7 @@
         <input type="hidden" name="aliastype" value="other">
         <input type="hidden" name="dmtype" value="bizmail">
         <input type="hidden" name="p" value="">
-        <h2 class="form-signin-heading">WELCOME TO MAXWE MAIL</h2>
+        <h3 class="form-signin-heading">WELCOME TO mail.maxwe.org</h3>
         <div class="input-group">
             <input name="uin" type="text" class="form-control" class="form-control" placeholder="Username" required autofocus aria-describedby="basic-addon2">
             <input type="hidden" name="domain" value="maxwe.org">
