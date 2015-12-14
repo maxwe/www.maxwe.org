@@ -7,8 +7,13 @@ canvas.addEventListener("dragend", onMouseDragEndHandler);
 var context = canvas.getContext("2d");
 
 var marginOffset = 100;
+
 var startOfX = 0 - marginOffset;
 var startOfY = 0 - marginOffset;
+
+canvas.width = this.window.screen.width + marginOffset;
+canvas.height = this.window.screen.width + marginOffset;
+
 var endOfX = this.window.screen.width + marginOffset;
 var endOfY = this.window.screen.height + marginOffset;
 
@@ -39,27 +44,37 @@ function drawBoardLine(context, startOfX, startOfY, endOfX, endOfY, spaceOffsetL
     var counterOfX = 0;
     for (var x = startOfX; x < endOfX; x = x + spaceOffsetLine) {
         context.beginPath();
-        context.lineWidth = "1";
+        context.lineWidth = 2;
         context.strokeStyle = "#FF0000";
         context.moveTo(x, 0)
-        context.lineTo(x, this.window.screen.height);
+        context.lineTo(x, endOfY);
         context.stroke();
 
-        context.fillText(counterOfX + "", x - 3, 10, 5);
+        drawText(context,counterOfX,x - 3,20,20);
+
         counterOfX++;
+
+        console.log(counterOfX);
     }
 
     var counterOfY = 0;
     for (var y = startOfY; y < endOfY; y = y + spaceOffsetLine) {
         context.beginPath();
-        context.lineWidth = "1";
+        context.lineWidth = 2;
         context.moveTo(0, y)
-        context.lineTo(this.window.screen.width, y);
+        context.lineTo(endOfX, y);
         context.stroke();
 
-        context.fillText(counterOfY + "", 5, y + 3, 2);
+        drawText(context,counterOfY + "", 5, y + 3, 20);
         counterOfY++;
     }
+}
+
+function drawText(context,text,x,y,maxWidth){
+    context.save();
+    context.font = "20px serif";
+    context.fillText(text, x, y, maxWidth);
+    context.restore();
 }
 
 if (canvas.addEventListener) {
