@@ -31,9 +31,9 @@ var endOfY = this.window.screen.height + marginOffset;
 /*初始化地图线条的间隔*/
 var spaceOffsetLine = 48;
 /*定义每次滚动鼠标滚轮缩放地图线条间隔的比率*/
-var multipleOfScale = spaceOffsetLine / 8;
+var multipleOfScale = spaceOffsetLine / 3;
 /*最大的地图线条的间隔*/
-var maxMultipleOfScale = 39;
+var maxMultipleOfScale = 76;
 /*最小的地图线条的间隔*/
 var minMultipleOfScale = 10;
 
