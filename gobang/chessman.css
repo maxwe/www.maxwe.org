@@ -1,0 +1,12 @@
+
+#canvas{
+    position:absolute;
+    z-index: 1;
+}
+.chessman{
+    position:absolute;
+    z-index: 2;
+    width: 51px;
+    height: 51px;
+    padding: 1px;
+}

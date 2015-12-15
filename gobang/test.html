@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>无标题文档</title>
+    <style>
+        #box1,#box2,#box3{width:200px;height:120px;position:absolute;}
+        #box1{background:#0f0;left:10px; top:10px;z-index:1;}
+        #box2{background:#f00;left:30px;top:30px;z-index:3;}
+        #box3{background:#00f;left:60px;top:60px;z-index:20;}
+        .c1{position:relative;z-index:1;background:#f90;width:500px;height:400px;}
+        .c2{position:relative;z-index:4;background:#09f;width:500px;height:400px;top:-100px;}
+        .box1,.box2,.box3{width:200px;height:120px;position:absolute;}
+        .box1{background:#090;left:10px; top:-210px;z-index:1;}
+        .box2{background:#900;left:30px;top:30px;z-index:3;}
+        .box3{background:#009;left:60px;top:60px;z-index:2;}
+    </style>
+</head>
+<body>
+<div class="c1">
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <div id="box3"></div>
+</div>
+<div class="c2">
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+</div>
+</body>
+</html>

@@ -6,12 +6,15 @@ function getDatabase() {
     });
 }
 var dataBase = getDatabase();
-if(!dataBase) {alert("您的浏览器不支持HTML5本地数据库");}
+if (!dataBase) {
+    alert("您的浏览器不支持HTML5本地数据库");
+}
+
 
 dataBase.transaction(function (trans) {
-    //trans.executeSql("create table if not exists Demo(uName text null,title text null,words text null)", [], function (trans, result) {
-    //}, function (trans, message) {//消息的回调函数alert(message);});
-    //}, function (trans, result) {
-    //}, function (trans, message) {
+    trans.executeSql("CREATE TABLE IF NOT EXISTS go_bang(xLineNumber Number NOT NULL ,yLineNumber Number NOT NULL ,status Number NOT NULL )", [], function (trans, result) {
+        //alert("ok");
+    }, function (trans, errorMessage) {
+        alert(errorMessage);
     });
-
+});

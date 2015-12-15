@@ -1,19 +1,20 @@
 var canvas = this.document.getElementById("canvas");
 canvas.draggable = true;
-
-if (canvas.addEventListener) {
-    // IE9, Chrome, Safari, Opera
-    canvas.addEventListener("mousewheel", onMouseWheelHandler, false);
-    // Firefox
-    canvas.addEventListener("DOMMouseScroll", onMouseWheelHandler, false);
-} else {
-    // IE 6/7/8
-    canvas.attachEvent("onmousewheel", onMouseWheelHandler);
-}
+//
+//if (canvas.addEventListener) {
+//    // IE9, Chrome, Safari, Opera
+//    canvas.addEventListener("mousewheel", onMouseWheelHandler, false);
+//    // Firefox
+//    canvas.addEventListener("DOMMouseScroll", onMouseWheelHandler, false);
+//} else {
+//    // IE 6/7/8
+//    canvas.attachEvent("onmousewheel", onMouseWheelHandler);
+//}
 
 canvas.addEventListener("dragstart", onMouseDragStartHandler);
 canvas.addEventListener("drag", onMouseDragHandler);
 canvas.addEventListener("dragend", onMouseDragEndHandler);
+canvas.addEventListener("click", onClickHandler);
 
 var context = canvas.getContext("2d");
 
@@ -39,7 +40,7 @@ var minMultipleOfScale = 10;
 
 /*初始化绘制地图*/
 //drawBoardLine(context, startOfX, startOfY, endOfX, endOfY, spaceOffsetLine);
-drawMapGrid(context,this.window.screen.width / 2,this.window.screen.height / 2,spaceOffsetLine,0,0);
+drawMapGrid(context, this.window.screen.width / 2, this.window.screen.height / 2, spaceOffsetLine, 0, 0);
 
 /**
  * 滚轮滚动事件
@@ -52,11 +53,11 @@ function onMouseWheelHandler(event) {
     if (delta > 0 && spaceOffsetLine < maxMultipleOfScale) {
         //向上滚动
         spaceOffsetLine = spaceOffsetLine + multipleOfScale;
-        drawMapGrid(context,event.x,event.y,spaceOffsetLine,0,0);
+        drawMapGrid(context, event.x, event.y, spaceOffsetLine, 0, 0);
     } else if (delta < 0 && spaceOffsetLine > minMultipleOfScale) {
         //向下滚动
         spaceOffsetLine = spaceOffsetLine - multipleOfScale;
-        drawMapGrid(context,event.x,event.y,spaceOffsetLine,0,0);
+        drawMapGrid(context, event.x, event.y, spaceOffsetLine, 0, 0);
     }
 }
 
@@ -75,16 +76,32 @@ function onMouseDragHandler(event) {
         onEndX = onMoveX = event.x;
         onEndY = onMoveY = event.y;
 
-        drawMapGrid(context,onMoveX,onMoveY,spaceOffsetLine,0,0);
+        drawMapGrid(context, onMoveX, onMoveY, spaceOffsetLine, 0, 0);
     }
 }
 
 function onMouseDragEndHandler(event) {
     //console.log("on drag end" + event.x + ":" + event.y + ":" + event.clientX + ":" + event.clientY);
 }
+var flag;
+function onClickHandler(event) {
+    context.save();
+    context.beginPath();
+    context.arc(event.x - 8, event.y - 8, 23, 0, 360, false);
+    if(flag) {
+        context.fillStyle = "green";
+        flag = false;
+    }else{
+        context.fillStyle = "blue";
+        flag = true;
+    }
+    context.fill();
+    context.closePath();
+    context.restore();
+}
 
 function drawMapGrid(context, startX, startY, spaceOffsetLine, currentXLineNumber, currentYLineNumber) {
-    if(spaceOffsetLine <= 0){
+    if (spaceOffsetLine <= 0) {
         throw "spaceOffsetLine <= 0";
     }
     var screenWidth = this.window.screen.width;
@@ -101,36 +118,36 @@ function drawMapGrid(context, startX, startY, spaceOffsetLine, currentXLineNumbe
      * 向前绘制纵线
      */
     for (var x = startX; x > 0; x = x - spaceOffsetLine) {
-        drawSingleLine(context,x,0,x,screenHeight);
-        drawLineNumber(context,forwardCurrentXLineNumber --,x - 5,20);
+        drawSingleLine(context, x, 0, x, screenHeight);
+        drawLineNumber(context, forwardCurrentXLineNumber--, x - 5, 20);
     }
 
     /**
      * 向后绘制纵线
      */
     for (var x = startX; x < screenWidth; x = x + spaceOffsetLine) {
-        drawSingleLine(context,x,0,x,screenHeight);
-        drawLineNumber(context,backwardCurrentXLineNumber ++,x - 5,20);
+        drawSingleLine(context, x, 0, x, screenHeight);
+        drawLineNumber(context, backwardCurrentXLineNumber++, x - 5, 20);
     }
 
     /**
      * 向上绘制横线
      */
     for (var y = startY; y > 0; y = y - spaceOffsetLine) {
-        drawSingleLine(context,0,y,screenWidth,y);
-        drawLineNumber(context,upCurrentYLineNumber -- ,0,y);
+        drawSingleLine(context, 0, y, screenWidth, y);
+        drawLineNumber(context, upCurrentYLineNumber--, 0, y);
     }
 
     /**
      * 向下绘制横线
      */
     for (var y = startY; y < screenHeight; y = y + spaceOffsetLine) {
-        drawSingleLine(context,0,y,screenWidth,y);
-        drawLineNumber(context,downCurrentYLineNumber ++ ,0,y)
+        drawSingleLine(context, 0, y, screenWidth, y);
+        drawLineNumber(context, downCurrentYLineNumber++, 0, y)
     }
 }
 
-function drawSingleLine(context,startX,startY,endX,endY){
+function drawSingleLine(context, startX, startY, endX, endY) {
     context.beginPath();
     context.lineWidth = 2;
     context.strokeStyle = "#FF0000";
