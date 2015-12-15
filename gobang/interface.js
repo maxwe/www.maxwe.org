@@ -16,6 +16,12 @@ canvas.addEventListener("drag", onMouseDragHandler);
 canvas.addEventListener("dragend", onMouseDragEndHandler);
 canvas.addEventListener("click", onClickHandler);
 
+if (window.localStorage) {
+} else {
+    alert("浏览暂不支持localStorage")
+}
+ //或者 if(typeof window.localStorage == 'undefined'){ 	alert("浏览暂不支持localStorage") }
+
 var context = canvas.getContext("2d");
 
 var marginOffset = 100;
@@ -88,10 +94,10 @@ function onClickHandler(event) {
     context.save();
     context.beginPath();
     context.arc(event.x - 8, event.y - 8, 23, 0, 360, false);
-    if(flag) {
+    if (flag) {
         context.fillStyle = "green";
         flag = false;
-    }else{
+    } else {
         context.fillStyle = "blue";
         flag = true;
     }
