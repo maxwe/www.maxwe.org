@@ -48,3 +48,4 @@ for (var startY = offsetTop; startY <= offsetTop + checkerboardCanvasHeight; sta
     var checkerboardLineObjectX = new CheckerboardLineObject(lineIndex ++ ,offsetLeft, startY, offsetLeft + checkerboardCanvasWidth, startY, 1);
     checkerboardLineArray.push(checkerboardLineObjectX);
 }
+

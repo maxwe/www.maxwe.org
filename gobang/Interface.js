@@ -12,11 +12,10 @@ var currentChessmanCanvas = this.document.getElementById("currentChessmanCanvas"
 var currentChessmanCanvasContext = currentChessmanCanvas.getContext("2d");
 
 
-
 /**
  * 绘制棋盘
  */
-drawCheckerboard(checkerboardCanvasContext,checkerboardLineArray);
+drawCheckerboard(checkerboardCanvasContext, checkerboardLineArray);
 
 /**
  * 下棋点击事件
@@ -64,15 +63,44 @@ function onClickListener(event) {
     if (centerX > 0 && centerY > 0) {
         //drawChessman(checkerboardCanvasContext,new ChessmanObject());
     }
-    if(clickerTimer % 2 == 0){
-        drawChessman(checkerboardCanvasContext,new ChessmanObject(clickerTimer,event.x,event.y,20,0,360,"black"));
-        currentChessmanCanvasContext.clearRect(0,0,200,100);
-        drawChessman(currentChessmanCanvasContext,new ChessmanObject(0,150,80,50,0,360,"black"));
-    }else{
-        drawChessman(checkerboardCanvasContext,new ChessmanObject(clickerTimer,event.x,event.y,20,0,360,"white"));
-        currentChessmanCanvasContext.clearRect(0,0,200,100);
-        drawChessman(currentChessmanCanvasContext,new ChessmanObject(0,150,80,50,0,360,"white"));
-    }
 
-    clickerTimer ++;
+    var chessmanObject = (new ChessmanObject(clickerTimer, event.x, event.y, 20, 0, 360, "black"));
+
+    if (clickerTimer % 2 == 0) {
+        drawChessman();
+        currentChessmanCanvasContext.clearRect(0, 0, 200, 100);
+        drawChessman(currentChessmanCanvasContext, new ChessmanObject(0, 150, 80, 50, 0, 360, "black"));
+    } else {
+        drawChessman(checkerboardCanvasContext, new ChessmanObject(clickerTimer, event.x, event.y, 20, 0, 360, "white"));
+        currentChessmanCanvasContext.clearRect(0, 0, 200, 100);
+        drawChessman(currentChessmanCanvasContext, new ChessmanObject(0, 150, 80, 50, 0, 360, "white"));
+    }
+    clickerTimer++;
+
+    /**
+     * TODO 子线程调用UI线程问题
+     */
+    //existsChessmanInDB(chessmanObject, function (existsChessmanResult) {
+    //    if (!existsChessmanResult) {
+    //        console.log("该位置不存在棋子");
+    //        addChessman(chessmanObject, function (addChessmanResult) {
+    //            if (addChessmanResult) {
+    //                if (clickerTimer % 2 == 0) {
+    //                    drawChessman();
+    //                    currentChessmanCanvasContext.clearRect(0, 0, 200, 100);
+    //                    drawChessman(currentChessmanCanvasContext, new ChessmanObject(0, 150, 80, 50, 0, 360, "black"));
+    //                } else {
+    //                    drawChessman(checkerboardCanvasContext, new ChessmanObject(clickerTimer, event.x, event.y, 20, 0, 360, "white"));
+    //                    currentChessmanCanvasContext.clearRect(0, 0, 200, 100);
+    //                    drawChessman(currentChessmanCanvasContext, new ChessmanObject(0, 150, 80, 50, 0, 360, "white"));
+    //                }
+    //                clickerTimer++;
+    //            } else {
+    //                console.log("保存棋子失败");
+    //            }
+    //        });
+    //    } else {
+    //        console.log("点击的位置已经存在了棋子");
+    //    }
+    //});
 }
