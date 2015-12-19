@@ -3,11 +3,10 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>五子棋</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <embed src="music.mp3" hidden="true" autostart="true" loop="-1">
+    <link rel="stylesheet" type="text/css" href="gobang.css">
+    <embed src="music.mp3" hidden="true" autostart="true" loop="true">
 </head>
 <body>
-
 <div id="menu">
     <canvas id="currentChessmanCanvas" style="background-color: red"></canvas>
 </div>
@@ -15,11 +14,10 @@
 <div id="checkerboard">
     <canvas id="checkerboardCanvas"></canvas>
 </div>
+
+
 <script src="jquery.js"></script>
-<script src="GoBangEntity.js"></script>
-<script src="Database.js"></script>
-<script src="Data.js"></script>
-<script src="Drawer.js"></script>
-<script src="Interface.js"></script>
+<script src="gobang.js"></script>
+<script src="currentChessmanCanvas.js"></script>
 </body>
 </html>

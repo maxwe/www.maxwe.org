@@ -1,7 +1,7 @@
 /**
  * Created by dingpengwei on 12/15/15.
  */
-var canvas = this.document.getElementById("canvas");
+var canvas = this.document.getElementById("checkerboardCanvas");
 var screenWidth = this.window.screen.width;
 var screenHeight = this.window.screen.height;
 canvas.width = screenWidth;
@@ -57,17 +57,18 @@ function onClickHandler(event) {
         context.beginPath();
         context.arc(centerX, centerY, 23, 0, 360, false);
         if (flag) {
-            context.fillStyle = "green";
+            context.fillStyle = "black";
             flag = false;
+
         } else {
-            context.fillStyle = "blue";
+            context.fillStyle = "white";
             flag = true;
         }
         context.fill();
         context.closePath();
         context.restore();
     }
-
+    onCurrentChessmanCheck(flag);
 
 }
 

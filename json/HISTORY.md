@@ -104,7 +104,7 @@ https://github.com/josdejong/jsoneditor
 
 ## 2013-02-09, version 2.0.0
 
-- Implemented a context menu, replacing the action buttons on the right side of
+- Implemented a checkerboardCanvasContext menu, replacing the action buttons on the right side of
   the editor and the inline action buttons. This gives a cleaner interface,
   more space for the actual contents, and more room for new controls (like
   insert and sort).

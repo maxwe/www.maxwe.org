@@ -1,14 +1,14 @@
 var canvas = this.document.getElementById("canvas");
 canvas.draggable = true;
 //
-//if (canvas.addEventListener) {
+//if (checkerboardCanvas.addEventListener) {
 //    // IE9, Chrome, Safari, Opera
-//    canvas.addEventListener("mousewheel", onMouseWheelHandler, false);
+//    checkerboardCanvas.addEventListener("mousewheel", onMouseWheelHandler, false);
 //    // Firefox
-//    canvas.addEventListener("DOMMouseScroll", onMouseWheelHandler, false);
+//    checkerboardCanvas.addEventListener("DOMMouseScroll", onMouseWheelHandler, false);
 //} else {
 //    // IE 6/7/8
-//    canvas.attachEvent("onmousewheel", onMouseWheelHandler);
+//    checkerboardCanvas.attachEvent("onmousewheel", onMouseWheelHandler);
 //}
 
 canvas.addEventListener("dragstart", onMouseDragStartHandler);
@@ -45,7 +45,7 @@ var maxMultipleOfScale = 76;
 var minMultipleOfScale = 10;
 
 /*初始化绘制地图*/
-//drawBoardLine(context, startOfX, startOfY, endOfX, endOfY, spaceOffsetLine);
+//drawBoardLine(checkerboardCanvasContext, startOfX, startOfY, endOfX, endOfY, spaceOffsetLine);
 drawMapGrid(context, this.window.screen.width / 2, this.window.screen.height / 2, spaceOffsetLine, 0, 0);
 
 /**
