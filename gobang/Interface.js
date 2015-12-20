@@ -11,11 +11,19 @@ var checkerboardCanvasContext = checkerboardCanvas.getContext("2d");
 var currentChessmanCanvas = this.document.getElementById("currentChessmanCanvas");
 var currentChessmanCanvasContext = currentChessmanCanvas.getContext("2d");
 
+var boundingX = checkerboardCanvas.getBoundingClientRect().left;
+var boundingY = checkerboardCanvas.getBoundingClientRect().top;
+
 
 /**
  * 绘制棋盘
  */
 drawCheckerboard(checkerboardCanvasContext, checkerboardLineArray);
+
+
+function toast(message) {
+    $("#toast").show().html(message).fadeOut(2000);
+}
 
 /**
  * 下棋点击事件
@@ -27,80 +35,63 @@ function onClickListener(event) {
      * 设置实际落点到期望落点之间最大的偏差
      * @type {number}
      */
-    var offset = 10;
+    var offset = 20;
 
-    var x = event.x;
-    var y = event.y;
-
-    //alert(x + " | " + y);
+    var x = event.x - boundingX;
+    var y = event.y - boundingY;
 
     var centerX = -1;
     var centerY = -1;
 
-    var found = false;
-
     for (var xAxi in checkerboardLineArray) {
         var checkerboardLine = checkerboardLineArray[xAxi];
-        if (((x > checkerboardLine.startX && x < (checkerboardLine.startX + offset)) || (x < checkerboardLine.startX && x > (checkerboardLine.startX - offset))) && !found) {
+        if (((x > checkerboardLine.startX && x < (checkerboardLine.startX + offset))
+            || (x < checkerboardLine.startX && x > (checkerboardLine.startX - offset))
+            || x == checkerboardLine.startX)) {
             centerX = checkerboardLine.startX;
-            found = true;
+            break;
         }
     }
-
-    found = false;
-
-
     for (var yAxi in checkerboardLineArray) {
         var checkerboardLine = checkerboardLineArray[yAxi];
-        if (((y > checkerboardLine.startY && y < (checkerboardLine.startY + offset)) || ( y < checkerboardLine.startY && y > (checkerboardLine.startY - offset))) && !found) {
+        if (((y > checkerboardLine.startY && y < (checkerboardLine.startY + offset))
+            || ( y < checkerboardLine.startY && y > (checkerboardLine.startY - offset))
+            || y == checkerboardLine.startY)) {
             centerY = checkerboardLine.startY;
-            found = true;
+            break;
         }
     }
 
-    console.log(x + " " + y + " " + centerX + " " + centerY);
+    $("#developLog").html("developer log <br>"+ "x=" + x + ", y=" + y + ",<br> centerX=" + centerX + ",<br> centerY=" + centerY);
 
     if (centerX > 0 && centerY > 0) {
-        //drawChessman(checkerboardCanvasContext,new ChessmanObject());
+        var chessmanObject = (new ChessmanObject(clickerTimer, centerX, centerY, 20, 0, 360));
+        /**
+         * TODO 子线程调用UI线程问题
+         */
+        existsChessmanInDB(chessmanObject, function (existsChessmanResult) {
+            if (!existsChessmanResult) {
+                addChessman(chessmanObject, function (addChessmanResult) {
+                    if (addChessmanResult) {
+                        if (clickerTimer % 2 == 0) {
+                            chessmanObject.fillStyle = "black";
+                            drawChessman(checkerboardCanvasContext, chessmanObject);
+                            currentChessmanCanvasContext.clearRect(0, 0, 200, 100);
+                            drawChessman(currentChessmanCanvasContext, new ChessmanObject(0, 150, 80, 50, 0, 360, "black"));
+                        } else {
+                            chessmanObject.fillStyle = "white";
+                            drawChessman(checkerboardCanvasContext, chessmanObject);
+                            currentChessmanCanvasContext.clearRect(0, 0, 200, 100);
+                            drawChessman(currentChessmanCanvasContext, new ChessmanObject(0, 150, 80, 50, 0, 360, "white"));
+                        }
+                        clickerTimer++;
+                    } else {
+                        toast("<h3 style='color: #ffffff;'>保存棋子失败。</h3>");
+                    }
+                });
+            } else {
+                toast("<h3 style='color: #ffffff;'>哎呦，坑已经被占用了。</h3>");
+            }
+        });
     }
-
-    var chessmanObject = (new ChessmanObject(clickerTimer, event.x, event.y, 20, 0, 360, "black"));
-
-    if (clickerTimer % 2 == 0) {
-        drawChessman();
-        currentChessmanCanvasContext.clearRect(0, 0, 200, 100);
-        drawChessman(currentChessmanCanvasContext, new ChessmanObject(0, 150, 80, 50, 0, 360, "black"));
-    } else {
-        drawChessman(checkerboardCanvasContext, new ChessmanObject(clickerTimer, event.x, event.y, 20, 0, 360, "white"));
-        currentChessmanCanvasContext.clearRect(0, 0, 200, 100);
-        drawChessman(currentChessmanCanvasContext, new ChessmanObject(0, 150, 80, 50, 0, 360, "white"));
-    }
-    clickerTimer++;
-
-    /**
-     * TODO 子线程调用UI线程问题
-     */
-    //existsChessmanInDB(chessmanObject, function (existsChessmanResult) {
-    //    if (!existsChessmanResult) {
-    //        console.log("该位置不存在棋子");
-    //        addChessman(chessmanObject, function (addChessmanResult) {
-    //            if (addChessmanResult) {
-    //                if (clickerTimer % 2 == 0) {
-    //                    drawChessman();
-    //                    currentChessmanCanvasContext.clearRect(0, 0, 200, 100);
-    //                    drawChessman(currentChessmanCanvasContext, new ChessmanObject(0, 150, 80, 50, 0, 360, "black"));
-    //                } else {
-    //                    drawChessman(checkerboardCanvasContext, new ChessmanObject(clickerTimer, event.x, event.y, 20, 0, 360, "white"));
-    //                    currentChessmanCanvasContext.clearRect(0, 0, 200, 100);
-    //                    drawChessman(currentChessmanCanvasContext, new ChessmanObject(0, 150, 80, 50, 0, 360, "white"));
-    //                }
-    //                clickerTimer++;
-    //            } else {
-    //                console.log("保存棋子失败");
-    //            }
-    //        });
-    //    } else {
-    //        console.log("点击的位置已经存在了棋子");
-    //    }
-    //});
 }

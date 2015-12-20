@@ -9,6 +9,17 @@ html,body{
     display: inline;
     position:absolute;
     background-color: #00BCD4;
+    z-index: 0;
+}
+
+#toast{
+    width: 100%;
+    height: 30px;
+    margin: 0 auto;
+    text-align: center;
+    display: none;
+    position:absolute;
+    z-index: 1;
 }
 
 #checkerboard{
@@ -18,9 +29,8 @@ html,body{
     position:absolute;
     margin-left: 10%;
     background-color: #FFC107;
-
+    z-index: 0;
 }
-
 #checkerboardCanvas{
     width: 100%;
     height: 100%;
