@@ -20,7 +20,6 @@ public class Secret {
     private static final boolean isEncrypt = true;
     private static final String ignoreDir = "ignore/md";
     private static final String projectDir = "project/md";
-    private static final String testProjectDir = "ignore/md-md";
 
     private static final String ALGORITHM = "DES";
     private static String KEY_FILE;
@@ -40,7 +39,7 @@ public class Secret {
         } else {
             File[] projectFiles = new File(projectDir).listFiles();
             for (File file : projectFiles) {
-                secret.decrypt(secretKey, file.getAbsolutePath(), testProjectDir + File.separator + file.getName());
+                secret.decrypt(secretKey, file.getAbsolutePath(), ignoreDir + File.separator + file.getName());
                 secret.decryptToBuffer(secretKey, file.getAbsolutePath());
             }
         }
