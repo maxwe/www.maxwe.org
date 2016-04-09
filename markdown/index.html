@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;font-size:18px;}.form,article{display:inline-block;width:49%;vertical-align:top;}.form > div{width:100%;}.form input{height:1.6em;line-height:1.6;padding:.3em .6em;width:100%;}.form textarea{width:100%;min-height:30em;line-height:1.6;padding:.3em .6em;}/* Tomorrow Night Theme *//* http://jmblog.github.com/color-themes-for-google-code-highlightjs *//* Original theme - https://github.com/chriskempson/tomorrow-theme *//* http://jmblog.github.com/color-themes-for-google-code-highlightjs *//* Tomorrow Comment */.hljs-comment,.hljs-title{color:#969896;}/* Tomorrow Red */.hljs-variable,.hljs-attribute,.hljs-tag,.hljs-regexp,.ruby .hljs-constant,.xml .hljs-tag .hljs-title,.xml .hljs-pi,.xml .hljs-doctype,.html .hljs-doctype,.css .hljs-id,.css .hljs-class,.css .hljs-pseudo{color:#cc6666;}/* Tomorrow Orange */.hljs-number,.hljs-preprocessor,.hljs-pragma,.hljs-built_in,.hljs-literal,.hljs-params,.hljs-constant{color:#de935f;}/* Tomorrow Yellow */.ruby .hljs-class .hljs-title,.css .hljs-rules .hljs-attribute{color:#f0c674;}/* Tomorrow Green */.hljs-string,.hljs-value,.hljs-inheritance,.hljs-header,.ruby .hljs-symbol,.xml .hljs-cdata{color:#b5bd68;}/* Tomorrow Aqua */.css .hljs-hexcolor{color:#8abeb7;}/* Tomorrow Blue */.hljs-function,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword,.perl .hljs-sub,.javascript .hljs-title,.coffeescript .hljs-title{color:#81a2be;}/* Tomorrow Purple */.hljs-keyword,.javascript .hljs-function{color:#b294bb;}.hljs{display:block;background:#1d1f21;color:#c5c8c6;padding:0.5em;}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .javascript,.xml .vbscript,.xml .css,.xml .hljs-cdata{opacity:0.5;}
+    </style>
+</head>
+<body>
+<div ng-controller="TextController">
+    <div class="form">
+
+        <div>
+
+            <label>Title:</label>
+
+            <div><input ng-model="article.title" /></div>
+        </div>
+
+        <div>
+
+            <label>Content:</label>
+
+            <div><textarea ng-model="article.content"></textarea></div>
+
+        </div>
+
+    </div>
+
+    <article class="article">
+
+        <header><h1>{{article.title}}</h1></header>
+
+        <section ng-bind-html-unsafe="article.content | markdown"></section>
+
+    </article>
+
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/marked/0.3.1/marked.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js"></script>
+
+<script type="text/javascript">
+
+    var renderer = new marked.Renderer();
+
+    renderer.code = function(code, language) { return '<pre class="hljs"><code class="language-'+language+'">'+ hljs.highlight(language, code).value + '</code></pre>'; };
+
+    marked.setOptions({renderer: renderer});
+
+    var myAppModule = angular.module('myApp', []);
+
+    myAppModule.filter('markdown', function(){ return function(input) { return marked(input); } });
+
+    myAppModule.controller('TextController', function($scope){ $scope.someText = 'You have started your journey.'; });
+
+</script>
+</body>
+</html>

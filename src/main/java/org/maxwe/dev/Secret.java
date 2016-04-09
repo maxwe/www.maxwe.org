@@ -14,17 +14,25 @@ import java.io.*;
 public class Secret {
 
     /**
+     * 该文件工作前请手动置为true工作后请手动置为false
+     */
+    private static final boolean WORKING = true;
+    /**
      * true 为加密过程
      * false 为解密过程
      */
-    private static final boolean isEncrypt = true;
-    private static final String ignoreDir = "ignore/md";
-    private static final String projectDir = "project/md";
+    private static final boolean isEncrypt = false;
+
+    private static final String ignoreDir = "ignore/co";
+    private static final String projectDir = "project/co";
 
     private static final String ALGORITHM = "DES";
     private static String KEY_FILE;
 
     public static void main(String[] args) throws Exception {
+        if (!WORKING){
+            throw new Exception("请打开保险");
+        }
         if (args == null || args.length < 1 || args[0] == null) {
             throw new Exception("请输入密钥文件地址");
         }
