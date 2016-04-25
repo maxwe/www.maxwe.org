@@ -16,15 +16,15 @@ public class Secret {
     /**
      * 该文件工作前请手动置为true工作后请手动置为false
      */
-    private static final boolean WORKING = true;
+    private static final boolean WORKING = false;
     /**
      * true 为加密过程
      * false 为解密过程
      */
     private static final boolean isEncrypt = false;
 
-    private static final String ignoreDir = "ignore/co";
-    private static final String projectDir = "project/co";
+    private static final String ignoreDir = "ignore/md";
+    private static final String projectDir = "project/md";
 
     private static final String ALGORITHM = "DES";
     private static String KEY_FILE;
