@@ -1,4 +1,4 @@
-package org.maxwe.dev;
+package org.maxwe.dev.encypt;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
